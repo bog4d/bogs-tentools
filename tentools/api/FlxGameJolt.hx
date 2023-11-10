@@ -440,6 +440,21 @@ class FlxGameJolt
 	}
 
 	/**
+	 * Remove a trophy for this user. Requires user authentication.
+	 *
+	 * @see 	http://gamejolt.com/api/doc/game/trophies/remove-achieved/
+	 * @param	TrophyID	The unique ID number for this trophy. Can be seen at http://gamejolt.com/dashboard/developer/games/achievements/<Your Game ID>/ in the right-hand column.
+	 * @param 	Callback	An optional callback function. Will return a Map<String:String> whose keys and values are equivalent to the key-value pairs returned by GameJolt.
+	 */
+	public static function removeTrophy(TrophyID:Int, ?Callback:Dynamic):Void
+	{
+		if (!authenticated)
+			return;
+
+		sendLoaderRequest(URL_API + "trophies/remove-achieved/" + RETURN_TYPE + _idURL + "&trophy_id=" + TrophyID, Callback);
+	}
+
+	/**
 	 * Retrieve the high scores from this game's remote data. If not authenticated, leaving Limit null will still return the top ten scores. Requires initialization.
 	 *
 	 * @see		http://gamejolt.com/api/doc/game/scores/fetch/
